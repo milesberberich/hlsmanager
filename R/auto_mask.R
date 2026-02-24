@@ -38,7 +38,7 @@ auto_mask <- function(input_filepath, output_filepath,
 
       maskrast <- ((r[[terra::nlyr(r)]]) %/% 2) %% 2
       r0 <- terra::mask(x = r[[1:(terra::nlyr(r)-1)]], mask = maskrast, maskvalues = 1)
-      r <- c(r0, r[[(nlyr(r))]])
+      r <- c(r0, r[[(terra::nlyr(r))]])
     }
     if (filterAdjacent == TRUE){
 

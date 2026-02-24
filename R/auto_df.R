@@ -58,7 +58,7 @@ auto_df <- function(folder_filepath, calculate_non_na_pixels = FALSE){
     for(z in seq_along(df$filename)){
 
       raster <- terra::rast(df$filepath[z])
-      na_raster <- terra::is.na(raster)
+      na_raster <- is.na(raster)
       na_count <- terra::global(is.na(raster), fun="sum")
       na_count <- na_count[,1]
       df$non_na_pixels[z] <- 1-(na_count/terra::ncell(raster))
