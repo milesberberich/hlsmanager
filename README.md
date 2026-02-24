@@ -25,9 +25,8 @@ This is a basic example which shows you how to solve a common problem:
 
 ``` r
 
-library(hlsmanager)
 
-#summary_df <- hlsmanager::auto_df("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/tiffsasdownloaded") # HLS data as downloaded
+#summary_df <- hls_manager::auto_df("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/tiffsasdownloaded") # HLS data as downloaded
 #print(summary_df)
 ```
 
