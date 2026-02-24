@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<div align="right">
+<div align="center">
 
 <img src="man/figures/hlsmanager_logo.png" width="400">
 
