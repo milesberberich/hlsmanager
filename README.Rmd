@@ -12,12 +12,16 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
+<div align="right">
+  <img src="man/figures/hlsmanager_logo.png" width="400">
+</div>
+
 
 # hlsmanager
 
 <!-- badges: start -->
 <!-- badges: end -->
-## Key features
+## 1. Key features
 
 The goal of hlsmanager is to simplify to work with the HLS dataset from NASA. When downloaded from NASA AppEEARS; all the bands get saved as on tiff-file and the user has to merge them based on their filename. With this package is easy to get:
   1. an overview about the data you downloaded  
@@ -26,36 +30,51 @@ The goal of hlsmanager is to simplify to work with the HLS dataset from NASA. Wh
   
 The data can be downloaded from: https://appeears.earthdatacloud.nasa.gov/?_ga=2.43130661.1417310973.1723470150-437277444.1719598629
 All the steps are consecutive and can be considered the first part of your workflow. 
-## Example
 
-This is a basic example which shows you how to solve a common problem:
+## 2. Using auto_df to get an overview of the data
 
 ```{r}
 
 
-summary_df <- hlsmanager::auto_df("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/tiffsasdownloaded") # HLS data as downloaded
+summary_df <- hlsmanager::auto_df("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/tiffsasdownloaded", calculate_non_na_pixels = T) # HLS data as downloaded
 head(summary_df)
 
 ```
 
+## 3.1 Using autogroup to stack the bands
 
-```{2. Grouping the bands to individual scenes}
+```{r}
 
-autogroup("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/tiffsasdownloaded", "C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/grouped")
+hlsmanager::auto_group("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/tiffsasdownloaded", "C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/grouped")
 
 print(paste("Number of files downloaded",length(list.files("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/tiffsasdownloaded"))))
 
 print(paste("Number of files grouped",length(list.files("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/grouped"))))
 
+# The data consists of 5 scenes with 3 bands each, including the FMask-layer. With this function, all the bands where grouped
+# into the five scenes.
+
 terra::plot(terra::rast(list.files("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/grouped", full.names=T)[1])[[1:2]])
-```
-
-```{3. Applying the cloud mask to the grouped files}
-
-#auto_mask("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/grouped", "C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/masked",   filterClouds = TRUE, filterAdjacent = TRUE, filterCloudshadow = TRUE, filterSnowice = FALSE, filterWater = FALSE, filterAerosol_climatology = FALSE, filterAerosol_low = FALSE, filterAerosol_moderate = FALSE, filterAerosol_high = FALSE)
-
-#terra::plot(terra::rast(list.files("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/masked", full.names=T)[1])[[1:2]])
 
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+## 3.2 Using auto_group to stack the bands (with missing bands)
+
+```{r}
+
+# In case some files are missing, the function give a warning and an overview of the bands. 
+hlsmanager::auto_group("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/tiffsasdownloaded_missing", "C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/grouped_missing")
+# In this case, the scene from 2025 doy 228 has only 2 bands and is therefore missing one. 
+```
+
+
+## 4. Using automask to cloudmask the grouped data
+
+```{r}
+
+hlsmanager::auto_mask("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/grouped", "C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/masked",   filterClouds = TRUE, filterAdjacent = TRUE, filterCloudshadow = TRUE, filterSnowice = FALSE, filterWater = FALSE, filterAerosol_climatology = FALSE, filterAerosol_low = FALSE, filterAerosol_moderate = FALSE, filterAerosol_high = FALSE)
+
+terra::plot(terra::rast(list.files("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/masked", full.names=T)[1])[[1:2]])
+
+```
+
