@@ -1,4 +1,4 @@
-
+#' groups all the bands based on their data and saves them in a new folder
 #' @description
 #' This function stack all bands of HLS data from the same day. Thats very handy because the data you download are one banded
 #' tiffs, merging them based on their filename is labour intense. You can also generate an info_df similar to the
@@ -12,7 +12,7 @@
 #' @return all the files will be grouped and saved in the new folder,
 #' @export
 
-autogroup <- function(input_filepath, output_filepath, give_df_info = FALSE){
+auto_group <- function(input_filepath, output_filepath, give_df_info = FALSE){
 
   my_df <- auto_df(input_filepath) #andere funktion benutzen
   dates <- unique(my_df[c("doy", "year")]) # hier erstmal alle tage raussuchen
@@ -36,9 +36,9 @@ autogroup <- function(input_filepath, output_filepath, give_df_info = FALSE){
     df_info$year[d] <- year_now
     df_info$doy[d] <- doy_now
 
-    stack <- rast(path) #raster stacken
+    stack <- terra::rast(path) #raster stacken
     name <- paste0(output_filepath, "/HLS_STACK_",year_now, "_", doy_now, "_", bands, ".tif")
-    writeRaster(stack, filename = name, overwrite = TRUE)
+    terra::writeRaster(stack, filename = name, overwrite = TRUE)
     print(paste0(year_now, "_", doy_now, "-stack was saved."))
 
     #wenn der nutzer den info df analog zu nasatodf gewünscht hat, wird er hier jetzt erstellt!

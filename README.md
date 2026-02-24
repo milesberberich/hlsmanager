@@ -16,34 +16,41 @@ this package is easy to get: 1. an overview about the data you
 downloaded  
 2. merge them based on the default filename 3. cloud mask them
 
-## Example
+The data can be downloaded from:
+<https://appeears.earthdatacloud.nasa.gov/?_ga=2.43130661.1417310973.1723470150-437277444.1719598629>
+All the steps are consecutive and can be considered the first part of
+your workflow. \## Example
 
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
+
 library(hlsmanager)
+
+#summary_df <- hlsmanager::auto_df("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/tiffsasdownloaded") # HLS data as downloaded
+#print(summary_df)
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+\`\`\`{2. Grouping the bands to individual scenes}
 
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
+\#autogroup(“C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/tiffsasdownloaded”,
+“C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/grouped”)
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this.
+\#print(paste(“Number of files
+downloaded”,length(list.files(“C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/tiffsasdownloaded”))))
 
-You can also embed plots, for example:
+\#print(paste(“Number of files
+grouped”,length(list.files(“C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/grouped”))))
 
-<img src="man/figures/README-pressure-1.png" alt="" width="100%" />
+\#terra::plot(list.files(“C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/grouped”,
+full.names=T)\[1\])
+
+
+    ```{3. Applying the cloud mask to the grouped files}
+
+    #auto_mask("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/grouped", "C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/masked",   filterClouds = TRUE, filterAdjacent = TRUE, filterCloudshadow = TRUE, filterSnowice = FALSE, filterWater = FALSE, filterAerosol_climatology = FALSE, filterAerosol_low = FALSE, filterAerosol_moderate = FALSE, filterAerosol_high = FALSE)
+
+    #terra::plot(list.files("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/masked", full.names=T)[1])
 
 In that case, don’t forget to commit and push the resulting figure
 files, so they display on GitHub and CRAN.

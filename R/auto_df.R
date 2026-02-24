@@ -1,4 +1,4 @@
-
+#' generates a dataframe listing all the HLS-files
 #' @description
 #' This function create a dataframe of a folder filled with HLS data. Each row of the dataframe is one file.
 #' The columns consist of: - year, - doy, - band, - filepath, - filename, - satellite type, - non_na_pixels.
@@ -36,12 +36,12 @@ auto_df <- function(folder_filepath, calculate_non_na_pixels = FALSE){
 
 
   # 4. now we want to find out the doy and year of the image
-  df$doy <- as.numeric(str_extract(df$filename, "(?<=doy\\d{4})\\d{3}"))
-  df$year <- as.numeric(str_extract(df$filename, "(?<=doy)\\d{4}"))
+  df$doy <- as.numeric(stringr::str_extract(df$filename, "(?<=doy\\d{4})\\d{3}"))
+  df$year <- as.numeric(stringr::str_extract(df$filename, "(?<=doy)\\d{4}"))
 
   # 5. now we want to find out the satellite typ as well
   for(x in seq_along(df$filename)){
-    kürzel <- str_extract(df$filename[x], "HLSS|HLSL")
+    kürzel <- stringr::str_extract(df$filename[x], "HLSS|HLSL")
     if(kürzel == "HLSS"){df$satellite_typ[x] <- "sentinel"
     }else if(kürzel == "HLSL"){df$satellite_typ[x] <- "landsat"
     }else{print("Some of the filenames do not contain HLSS or HLSL. Check if the filenames are correct!")}
@@ -49,7 +49,7 @@ auto_df <- function(folder_filepath, calculate_non_na_pixels = FALSE){
   rm(kürzel)
 
   # 6. now we want to export the band
-  df$band <- str_extract(df$filename, "(?<=_)[A-Za-z0-9]+(?=_)")
+  df$band <- stringr::str_extract(df$filename, "(?<=_)[A-Za-z0-9]+(?=_)")
 
   # 7. optional command to calculate the non_NA_values
 
@@ -57,11 +57,11 @@ auto_df <- function(folder_filepath, calculate_non_na_pixels = FALSE){
 
     for(z in seq_along(df$filename)){
 
-      raster <- rast(df$filepath[z])
-      na_raster <- is.na(raster)
-      na_count <- global(is.na(raster), fun="sum")
+      raster <- terra::rast(df$filepath[z])
+      na_raster <- terra::is.na(raster)
+      na_count <- terra::global(is.na(raster), fun="sum")
       na_count <- na_count[,1]
-      df$non_na_pixels[z] <- 1-(na_count/ncell(raster))
+      df$non_na_pixels[z] <- 1-(na_count/terra::ncell(raster))
     }
     rm(raster, na_raster, na_count)
   }

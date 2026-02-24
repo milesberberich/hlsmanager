@@ -1,4 +1,4 @@
-
+#' applies masking on the grouped files and saves it in a new folder
 #' @description
 #' This function stack all bands of HLS data from the same day. Thats very handy because the data you download are one banded
 #' tiffs, merging them based on their filename is labour intense. You can also generate an info_df similar to the
@@ -19,7 +19,7 @@
 #' @return All the files will be filtered and saved in the new folder.
 #' @export
 #'
-automask <- function(input_filepath, output_filepath,
+auto_mask <- function(input_filepath, output_filepath,
                      filterClouds = FALSE, filterAdjacent = FALSE, filterCloudshadow = FALSE,
                      filterSnowice = FALSE, filterWater = FALSE, filterAerosol_climatology = FALSE,
                      filterAerosol_low = FALSE, filterAerosol_moderate = FALSE, filterAerosol_high = FALSE){
@@ -29,73 +29,73 @@ automask <- function(input_filepath, output_filepath,
   for (v in seq_along(rasterlist)){
 
     rasterpath <- rasterlist[v]
-    r <- rast(rasterpath)
+    r <- terra::rast(rasterpath)
 
 
     # 1. If-blocks to mask each "obstacle" ------------------------------------
 
     if (filterClouds == TRUE){
 
-      maskrast <- ((r[[nlyr(r)]]) %/% 2) %% 2
-      r0 <- mask(x = r[[1:(nlyr(r)-1)]], mask = maskrast, maskvalues = 1)
+      maskrast <- ((r[[terra::nlyr(r)]]) %/% 2) %% 2
+      r0 <- terra::mask(x = r[[1:(terra::nlyr(r)-1)]], mask = maskrast, maskvalues = 1)
       r <- c(r0, r[[(nlyr(r))]])
     }
     if (filterAdjacent == TRUE){
 
-      maskrast <- ((r[[nlyr(r)]]) %/% 4) %% 2
-      r0 <- mask(x = r[[1:(nlyr(r)-1)]], mask = maskrast, maskvalues = 1)
-      r <- c(r0, r[[(nlyr(r))]])
+      maskrast <- ((r[[terra::nlyr(r)]]) %/% 4) %% 2
+      r0 <- terra::mask(x = r[[1:(terra::nlyr(r)-1)]], mask = maskrast, maskvalues = 1)
+      r <- c(r0, r[[(terra::nlyr(r))]])
     }
 
     if (filterCloudshadow == TRUE){
 
-      maskrast <- ((r[[nlyr(r)]]) %/% 8) %% 2
-      r0 <- mask(x = r[[1:(nlyr(r)-1)]], mask = maskrast, maskvalues = 1)
-      r <- c(r0, r[[(nlyr(r))]])
+      maskrast <- ((r[[terra::nlyr(r)]]) %/% 8) %% 2
+      r0 <- terra::mask(x = r[[1:(terra::nlyr(r)-1)]], mask = maskrast, maskvalues = 1)
+      r <- c(r0, r[[(terra::nlyr(r))]])
     }
 
     if (filterSnowice == TRUE){
 
-      maskrast <- ((r[[nlyr(r)]]) %/% 16) %% 2
-      r0 <- mask(x = r[[1:(nlyr(r)-1)]], mask = maskrast, maskvalues = 1)
-      r <- c(r0, r[[(nlyr(r))]])
+      maskrast <- ((r[[terra::nlyr(r)]]) %/% 16) %% 2
+      r0 <- terra::mask(x = r[[1:(terra::nlyr(r)-1)]], mask = maskrast, maskvalues = 1)
+      r <- c(r0, r[[(terra::nlyr(r))]])
     }
 
     if (filterWater == TRUE){
 
-      maskrast <- ((r[[nlyr(r)]]) %/% 32) %% 2
-      r0 <- mask(x = r[[1:(nlyr(r)-1)]], mask = maskrast, maskvalues = 1)
-      r <- c(r0, r[[(nlyr(r))]])
+      maskrast <- ((r[[terra::nlyr(r)]]) %/% 32) %% 2
+      r0 <- terra::mask(x = r[[1:(terra::nlyr(r)-1)]], mask = maskrast, maskvalues = 1)
+      r <- c(r0, r[[(terra::nlyr(r))]])
     }
 
-    aersolmask <- ((r[[nlyr(r)]]) %/% 64)
+    aersolmask <- ((r[[terra::nlyr(r)]]) %/% 64)
     if (filterAerosol_climatology == TRUE){
 
-      r0 <- mask(x = r[[1:(nlyr(r)-1)]], mask = maskrast, maskvalues = 0)
-      r <- c(r0, r[[(nlyr(r))]])
+      r0 <- terra::mask(x = r[[1:(terra::nlyr(r)-1)]], mask = maskrast, maskvalues = 0)
+      r <- c(r0, r[[(terra::nlyr(r))]])
     }
 
     if (filterAerosol_low == TRUE){
 
-      r0 <- mask(x = r[[1:(nlyr(r)-1)]], mask = maskrast, maskvalues = 1)
-      r <- c(r0, r[[(nlyr(r))]])
+      r0 <- terra::mask(x = r[[1:(terra::nlyr(r)-1)]], mask = maskrast, maskvalues = 1)
+      r <- c(r0, r[[(terra::nlyr(r))]])
     }
 
     if (filterAerosol_moderate == TRUE){
 
-      r0 <- mask(x = r[[1:(nlyr(r)-1)]], mask = maskrast, maskvalues = 2)
-      r <- c(r0, r[[(nlyr(r))]])
+      r0 <- terra::mask(x = r[[1:(terra::nlyr(r)-1)]], mask = maskrast, maskvalues = 2)
+      r <- c(r0, r[[(terra::nlyr(r))]])
 
     }
 
     if (filterAerosol_high == TRUE){
 
-      r0 <- mask(x = r[[1:(nlyr(r)-1)]], mask = maskrast, maskvalues = 3)
-      r <- c(r0, r[[(nlyr(r))]])
+      r0 <- terra::mask(x = r[[1:(terra::nlyr(r)-1)]], mask = maskrast, maskvalues = 3)
+      r <- c(r0, r[[(terra::nlyr(r))]])
     }
-    r <- r[[1:(nlyr(r)-1)]]
+    r <- r[[1:(terra::nlyr(r)-1)]]
     e <- paste0(output_filepath, "/MASKED_", basename(rasterpath))
-    writeRaster(r, e)
+    terra::writeRaster(r, e)
     print(paste0(e, " was filtered and saved."))
   }
   print("MASKING FINISHED.")
