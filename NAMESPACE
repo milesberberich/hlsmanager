@@ -3,3 +3,4 @@
 export(auto_df)
 export(auto_group)
 export(auto_mask)
+export(reducer)
