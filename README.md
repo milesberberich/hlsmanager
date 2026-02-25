@@ -136,29 +136,17 @@ terra::plot(terra::rast(list.files("C:/Users/miles/OneDrive/Dokumente/EAGLE/karl
 # computation is still carried out with the non-empty intervalls.
 
 
-reducer(215, 280, 5, reducer = "mean", "C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/masked", "C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/mean")
+reducer(215, 280, 10, reducer = "mean", "C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/masked", "C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/mean")
 #> The time intervall from   to 215 in the year 2025 has no scenes. The next step is computed instead.
 #> 
-#> [1] "Raster from 215 to 220 was calculated."
-#> The time intervall from  220 to 225 in the year 2025 has no scenes. The next step is computed instead.
+#> [1] "Raster from 215 to 225 was calculated."
+#> [1] "Raster from 225 to 235 was calculated."
+#> [1] "Raster from 235 to 245 was calculated."
+#> The time intervall from  245 to 255 in the year 2025 has no scenes. The next step is computed instead.
 #> 
-#> [1] "Raster from 225 to 230 was calculated."
-#> [1] "Raster from 230 to 235 was calculated."
-#> [1] "Raster from 235 to 240 was calculated."
-#> [1] "Raster from 240 to 245 was calculated."
-#> The time intervall from  245 to 250 in the year 2025 has no scenes. The next step is computed instead.
+#> The time intervall from  255 to 265 in the year 2025 has no scenes. The next step is computed instead.
 #> 
-#> The time intervall from  250 to 255 in the year 2025 has no scenes. The next step is computed instead.
-#> 
-#> The time intervall from  255 to 260 in the year 2025 has no scenes. The next step is computed instead.
-#> 
-#> The time intervall from  260 to 265 in the year 2025 has no scenes. The next step is computed instead.
-#> 
-#> The time intervall from  265 to 270 in the year 2025 has no scenes. The next step is computed instead.
-#> 
-#> The time intervall from  270 to 275 in the year 2025 has no scenes. The next step is computed instead.
-#> 
-#> The time intervall from  275 to 280 in the year 2025 has no scenes. The next step is computed instead.
+#> The time intervall from  265 to 275 in the year 2025 has no scenes. The next step is computed instead.
 #> 
 #> THE YEAR 2025 IS FINISHED.
 #> 

@@ -88,7 +88,7 @@ terra::plot(terra::rast(list.files("C:/Users/miles/OneDrive/Dokumente/EAGLE/karl
 # computation is still carried out with the non-empty intervalls.
 
 
-reducer(215, 280, 5, reducer = "mean", "C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/masked", "C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/mean")
+reducer(215, 280, 10, reducer = "mean", "C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/masked", "C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/mean")
 
 terra::plot(terra::rast(list.files("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/mean", full.names = T)[1]))
 
