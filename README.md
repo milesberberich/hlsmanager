@@ -30,7 +30,7 @@ your workflow.
 ## 2. Using auto_df to get an overview of the data
 
 ``` r
-
+library(hlsmanager)
 
 summary_df <- hlsmanager::auto_df("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/tiffsasdownloaded", calculate_non_na_pixels = T) # HLS data as downloaded
 #> [1] "dataframe with,  15  was created."
@@ -94,17 +94,17 @@ terra::plot(terra::rast(list.files("C:/Users/miles/OneDrive/Dokumente/EAGLE/karl
 hlsmanager::auto_group("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/tiffsasdownloaded_missing", "C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/grouped_missing")
 #> [1] "dataframe with,  14  was created."
 #> [1] "2025_218-stack was saved."
+#> [1] "2025_228-stack was saved."
 #> [1] "2025_233-stack was saved."
 #> [1] "2025_235-stack was saved."
 #> [1] "2025_243-stack was saved."
-#> [1] "2025_228-stack was saved."
 #> [1] "Not all the rasterstacks have the same amount of bands. Here you can see the statistics of the rasterstacks and the number of bands. The Fmask is counted as a band as well. You can still use the data, its just not complete."
 #>   year doy number_of_bands
 #> 1 2025 218               3
-#> 2 2025 233               3
-#> 3 2025 235               3
-#> 4 2025 243               3
-#> 5 2025 228               2
+#> 2 2025 228               3
+#> 3 2025 233               3
+#> 4 2025 235               3
+#> 5 2025 243               2
 #> [1] "5 RASTERSTACKS WERE SAVED."
 # In this case, the scene from 2025 doy 228 has only 2 bands and is therefore missing one. 
 ```
@@ -125,3 +125,16 @@ terra::plot(terra::rast(list.files("C:/Users/miles/OneDrive/Dokumente/EAGLE/karl
 ```
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" alt="" width="100%" />
+
+## 5. Using the reducer function to compute means
+
+``` r
+# With this command we compute the means from doy 215 to doy 280 in steps of five days. 
+# Most of the intervalls will be empty and we will get an error message for that.
+# computation is still carried out with the non-empty intervalls.
+
+
+#reducer(215, 280, 5, reducer = "mean", "C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/masked", "C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/mean")
+
+#terra::plot(terra::rast(list.files("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/mean"), full.names = T)[1])
+```

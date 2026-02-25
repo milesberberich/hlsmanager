@@ -14,20 +14,20 @@ reducer(
 )
 }
 \arguments{
-\item{start_doy}{\code(numeric). The start-day-of-the-year for the computation. 0 if you want to compute a full timeseries, 100 e.g. if the user is only interested in the summer.}
+\item{start_doy}{\code{numeric}. The start-day-of-the-year for the computation. 0 if you want to compute a full timeseries, 100 e.g. if the user is only interested in the summer.}
 
-\item{end_doy}{\code(numeric). The end-day-of-the-year for the computation. 365 if you want to compute a full timeseries, 200 e.g. if the user is not interested in the winter.}
+\item{end_doy}{\code{numeric}. The end-day-of-the-year for the computation. 365 if you want to compute a full timeseries, 200 e.g. if the user is not interested in the winter.}
 
-\item{intervall}{\code(numeric). The duration of each time step in days. If an intervall is empty because of the temporal resolution of Landsat and Sentinel, you will get an error message and the step will be skipped.}
+\item{intervall}{\code{(numeric}. The duration of each time step in days. If an intervall is empty because of the temporal resolution of Landsat and Sentinel, you will get an error message and the step will be skipped.}
 
-\item{reducer_mode}{\code(string). The mode or reducing: mean, min, max, sum, modal, median are available.}
+\item{reducer_mode}{\code{string}. The mode or reducing: mean, min, max, sum, modal, median are available.}
 
 \item{input_filepath}{\code{character}. The filepath of the grouped and masked HLS files.}
 
 \item{output_filepath}{\code{character}. The output filepath.}
 }
 \value{
-the dataframe for the HLS files
+just saves the files in the new folder
 }
 \description{
 This function calculates the mean, sum, min/max, sd, model, or median of a given folder filled with masekd and grouped

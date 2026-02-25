@@ -4,10 +4,10 @@
 #' HLS-tiffs. The files had to be produced using the hlsmanager package. The mean, sum and so on are calculated
 #' band wise. The new files are saved in a given folder. The user defines the start- and end-day-of-the-year and the
 #' intervall. Then the means get calculated for each year, in this intervalls.
-#' @param start_doy \code(numeric). The start-day-of-the-year for the computation. 0 if you want to compute a full timeseries, 100 e.g. if the user is only interested in the summer.
-#' @param end_doy \code(numeric). The end-day-of-the-year for the computation. 365 if you want to compute a full timeseries, 200 e.g. if the user is not interested in the winter.
-#' @param intervall \code(numeric). The duration of each time step in days. If an intervall is empty because of the temporal resolution of Landsat and Sentinel, you will get an error message and the step will be skipped.
-#' @param reducer_mode \code(string). The mode or reducing: mean, min, max, sum, modal, median are available.
+#' @param start_doy \code{numeric}. The start-day-of-the-year for the computation. 0 if you want to compute a full timeseries, 100 e.g. if the user is only interested in the summer.
+#' @param end_doy \code{numeric}. The end-day-of-the-year for the computation. 365 if you want to compute a full timeseries, 200 e.g. if the user is not interested in the winter.
+#' @param intervall \code{(numeric}. The duration of each time step in days. If an intervall is empty because of the temporal resolution of Landsat and Sentinel, you will get an error message and the step will be skipped.
+#' @param reducer_mode \code{string}. The mode or reducing: mean, min, max, sum, modal, median are available.
 #' @param input_filepath \code{character}. The filepath of the grouped and masked HLS files.
 #' @param output_filepath \code{character}. The output filepath.
 #' @return just saves the files in the new folder
@@ -49,7 +49,7 @@ reducer <- function(start_doy, end_doy, intervall, reducer_mode = "mean", input_
       list_step <- (df_step$filepath)
       raster <- terra::rast(list_step)
 
-      n_bands <- terra::nlyr(rast(df_step$filepath[1])) # Check how many bands are in one file
+      n_bands <- terra::nlyr(terra::rast(df_step$filepath[1])) # Check how many bands are in one file
       group_index <- rep(1:n_bands, length(df_step$filepath))
 
       if (reducer_mode == "mean"){
