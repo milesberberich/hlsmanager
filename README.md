@@ -27,7 +27,9 @@ The data can be downloaded from:
 All the steps are consecutive and can be considered the first part of
 your workflow. The package is based on the naming convention of
 NASAAppears, its crucial to not rename the files. In case of unexpected
-error, dont use filepaths that include underscores.
+error, dont use filepaths that include underscores. The package never
+loads all data into RAM, so it can be used to process a large number of
+scenes.
 
 ## 2. Using auto_df to get an overview of the data
 
@@ -134,6 +136,7 @@ terra::plot(terra::rast(list.files("C:/Users/miles/OneDrive/Dokumente/EAGLE/karl
 # With this command we compute the means from doy 215 to doy 280 in steps of five days. 
 # Most of the intervalls will be empty and we will get an error message for that.
 # computation is still carried out with the non-empty intervalls.
+# All the reducer_modes ignore NAs. 
 
 
 reducer(215, 280, 10, reducer = "mean", "C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/masked", "C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/mean")
@@ -156,3 +159,8 @@ terra::plot(terra::rast(list.files("C:/Users/miles/OneDrive/Dokumente/EAGLE/karl
 ```
 
 <img src="man/figures/README-unnamed-chunk-6-1.png" alt="" width="100%" />
+
+``` r
+
+# In this case, we don´t see a difference to the plotted SpatRaster in 4., but only because the other SpatRaster consist only of clouds and therefore NAs. 
+```
