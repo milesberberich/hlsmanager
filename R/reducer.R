@@ -75,7 +75,7 @@ reducer <- function(start_doy, end_doy, intervall, reducer_mode = "mean", input_
       else {stop("Use a valid reducer like: mean, min, max, modal, sd, sum or median")}
 
       names(result) <- paste0("mean_band_", 1:n_bands)
-      writeRaster(result, paste0(output_filepath, "/", reducer_mode, "_", j, "_",start, "-",end, ".tif" ))
+      terra::writeRaster(result, paste0(output_filepath, "/", reducer_mode, "_", j, "_",start, "-",end, ".tif" ))
       print(paste("Raster from", start, "to", end, "was calculated."))
     }
     cat(paste("THE YEAR", j, "IS FINISHED.\n\n"))
