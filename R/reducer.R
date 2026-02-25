@@ -53,25 +53,25 @@ reducer <- function(start_doy, end_doy, intervall, reducer_mode = "mean", input_
       group_index <- rep(1:n_bands, length(df_step$filepath))
 
       if (reducer_mode == "mean"){
-        result <- terra::tapp(raster, index = group_index, fun = mean)}
+        result <- terra::tapp(raster, index = group_index, fun = mean, na.rm = T)}
 
       else if (reducer_mode == "median"){
-        result <- terra::tapp(raster, index = group_index, fun = median)}
+        result <- terra::tapp(raster, index = group_index, fun = median, na.rm = T)}
 
       else if (reducer_mode == "sd"){
-        result <- terra::tapp(raster, index = group_index, fun = sd)}
+        result <- terra::tapp(raster, index = group_index, fun = sd, na.rm = T)}
 
       else if (reducer_mode == "max"){
-        result <- terra::tapp(raster, index = group_index, fun = max)}
+        result <- terra::tapp(raster, index = group_index, fun = max, na.rm = T)}
 
       else if (reducer_mode == "min"){
-        result <- terra::tapp(raster, index = group_index, fun = min)}
+        result <- terra::tapp(raster, index = group_index, fun = min, na.rm = T)}
 
       else if (reducer_mode == "sum"){
-        result <- terra::tapp(raster, index = group_index, fun = sum)}
+        result <- terra::tapp(raster, index = group_index, fun = sum, na.rm = T)}
 
       else if (reducer_mode == "modal"){
-        result <- terra::tapp(raster, index = group_index, fun = modal)}
+        result <- terra::tapp(raster, index = group_index, fun = modal, na.rm = T)}
       else {stop("Use a valid reducer like: mean, min, max, modal, sd, sum or median")}
 
       names(result) <- paste0("mean_band_", 1:n_bands)

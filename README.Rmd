@@ -70,13 +70,13 @@ hlsmanager::auto_group("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/tif
 ```
 
 
-## 4. Using automask to cloudmask the grouped data
+## 4. Using auto_mask to cloudmask the grouped data
 
 ```{r}
 
 hlsmanager::auto_mask("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/grouped", "C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/masked",   filterClouds = TRUE, filterAdjacent = TRUE, filterCloudshadow = TRUE, filterSnowice = FALSE, filterWater = FALSE, filterAerosol_climatology = FALSE, filterAerosol_low = FALSE, filterAerosol_moderate = FALSE, filterAerosol_high = FALSE)
 
-terra::plot(terra::rast(list.files("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/masked", full.names=T)[1])[[1:2]])
+terra::plot(terra::rast(list.files("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/masked", full.names=T)[3])[[1:2]])
 
 ```
 
@@ -90,7 +90,7 @@ terra::plot(terra::rast(list.files("C:/Users/miles/OneDrive/Dokumente/EAGLE/karl
 
 reducer(215, 280, 10, reducer = "mean", "C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/masked", "C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/mean")
 
-terra::plot(terra::rast(list.files("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/mean", full.names = T)[1]))
+terra::plot(terra::rast(list.files("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/mean", full.names = T)[2]))
 
 
 ```

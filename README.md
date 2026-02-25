@@ -111,7 +111,7 @@ hlsmanager::auto_group("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/tif
 # In this case, the scene from 2025 doy 228 has only 2 bands and is therefore missing one. 
 ```
 
-## 4. Using automask to cloudmask the grouped data
+## 4. Using auto_mask to cloudmask the grouped data
 
 ``` r
 
@@ -123,7 +123,7 @@ hlsmanager::auto_mask("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/grou
 #> [1] "C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/masked/MASKED_HLS_STACK_2025_243_B04-B08-Fmask.tif was filtered and saved."
 #> [1] "MASKING FINISHED."
 
-terra::plot(terra::rast(list.files("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/masked", full.names=T)[1])[[1:2]])
+terra::plot(terra::rast(list.files("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/masked", full.names=T)[3])[[1:2]])
 ```
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" alt="" width="100%" />
@@ -152,7 +152,7 @@ reducer(215, 280, 10, reducer = "mean", "C:/Users/miles/OneDrive/Dokumente/EAGLE
 #> 
 #> [1] "FUNCTION ENDED SUCCESFULLY.\n\n"
 
-terra::plot(terra::rast(list.files("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/mean", full.names = T)[1]))
+terra::plot(terra::rast(list.files("C:/Users/miles/OneDrive/Dokumente/EAGLE/karlakolumna/mean", full.names = T)[2]))
 ```
 
 <img src="man/figures/README-unnamed-chunk-6-1.png" alt="" width="100%" />
