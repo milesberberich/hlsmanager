@@ -31,6 +31,14 @@ error, dont use filepaths that include underscores. The package never
 loads all data into RAM, so it can be used to process a large number of
 scenes.
 
+Possible hlsmanager workflow:
+
+<div align="center">
+
+<img src="man/figures/hls.png" width="850">
+
+</div>
+
 ## 2. Using auto_df to get an overview of the data
 
 ``` r
