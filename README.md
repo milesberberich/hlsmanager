@@ -35,7 +35,7 @@ Possible hlsmanager workflow:
 
 <div align="center">
 
-<img src="man/figures/hls.png" width="850">
+<img src="man/figures/hls3.png" width="850">
 
 </div>
 
