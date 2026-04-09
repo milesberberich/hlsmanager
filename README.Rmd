@@ -21,15 +21,19 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 <!-- badges: end -->
-## 1. Key features
+## 1. Introduction
 
-The goal of hlsmanager is to simplify to work with the HLS dataset from NASA. When downloaded from NASA AppEEARS; all the bands get saved as on tiff-file and the user has to merge them based on their filename. With this package is easy to get:
-  1. an overview about the data you downloaded  
-  2. merge them based on the default filename
-  3. cloud mask them 
+The goal of hlsmanager is to simplify to work with the HLS dataset from NASA. When downloaded from NASA AppEEARS; all the bands get saved as on tiff-file and the user has to merge them based on their filename.\
+
+This package offers:\
+
+  1. an overview about the data you downloaded\  
+  2. merge them based on the default filename\
+  3. cloud mask them\
+  4. Reduce data to temporal means/median/sd.
   
 The data can be downloaded from: https://appeears.earthdatacloud.nasa.gov/?_ga=2.43130661.1417310973.1723470150-437277444.1719598629
-All the steps are consecutive and can be considered the first part of your workflow. 
+All the steps are consecutive and can be considered the first part of your analysis workflow. 
 The package is based on the naming convention of NASAAppears, its crucial to not rename the files.
 In case of unexpected error, dont use filepaths that include underscores.
 The package never loads all data into RAM, so it can be used to process a large number of scenes.
