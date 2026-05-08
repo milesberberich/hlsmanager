@@ -10,10 +10,11 @@
 #' @param reducer_mode \code{string}. The mode or reducing: mean, min, max, sum, modal, median are available.
 #' @param input_filepath \code{character}. The filepath of the grouped and masked HLS files.
 #' @param output_filepath \code{character}. The output filepath.
+#' @param verbose \code{logical}. If \code{TRUE}, the function returns status updates.
 #' @return just saves the files in the new folder
 #' @export
 
-reducer <- function(start_doy, end_doy, intervall, reducer_mode = "mean", input_filepath, output_filepath){
+reducer <- function(start_doy, end_doy, intervall, reducer_mode = "mean", input_filepath, output_filepath, verbose = TRUE){
 
   # 1. generating an df
   rasterlist <- list.files(input_filepath, full.names = TRUE)
