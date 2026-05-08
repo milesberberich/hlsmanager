@@ -9,10 +9,11 @@
 #' @param input_filepath \code{character}. The filepath of the downloaded HLS files.
 #' @param output_filepath \code{character}. The filepath where the grouped data should be saved.
 #' @param give_df_info \code{logical}. If \code{TRUE}, the function returns a \code{data.frame} where each file is a row and columns include: bands, filepath, filename, and satellite type.
+#' @param verbose \code{logical}. If \code{TRUE}, the function returns status updates.
 #' @return all the files will be grouped and saved in the new folder,
 #' @export
 
-auto_group <- function(input_filepath, output_filepath, give_df_info = FALSE){
+auto_group <- function(input_filepath, output_filepath, give_df_info = FALSE, verbose = TRUE){
 
   my_df <- auto_df(input_filepath) #andere funktion benutzen
   dates <- unique(my_df[c("doy", "year")]) # hier erstmal alle tage raussuchen
@@ -39,7 +40,8 @@ auto_group <- function(input_filepath, output_filepath, give_df_info = FALSE){
     stack <- terra::rast(path) #raster stacken
     name <- paste0(output_filepath, "/HLS_STACK_",year_now, "_", doy_now, "_", bands, ".tif")
     terra::writeRaster(stack, filename = name, overwrite = TRUE)
-    print(paste0(year_now, "_", doy_now, "-stack was saved."))
+    if (verbose == TRUE){
+      print(paste0(year_now, "_", doy_now, "-stack was saved."))}
 
     #wenn der nutzer den info df analog zu nasatodf gewünscht hat, wird er hier jetzt erstellt!
     if(give_df_info == TRUE){

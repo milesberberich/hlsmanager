@@ -16,13 +16,14 @@
 #' @param filterAerosol_low \code{logical}. If \code{TRUE}, sets all pixels with low aerosol content to \code{NA}.
 #' @param filterAerosol_moderate \code{logical}. If \code{TRUE}, sets all pixels with moderate aerosol content to \code{NA}.
 #' @param filterAerosol_high \code{logical}. If \code{TRUE}, sets all pixels with high aerosol content to \code{NA}.
+#' @param verbose \code{logical}. If \code{TRUE}, the function returns status updates.
 #' @return All the files will be filtered and saved in the new folder.
 #' @export
 #'
 auto_mask <- function(input_filepath, output_filepath,
                      filterClouds = FALSE, filterAdjacent = FALSE, filterCloudshadow = FALSE,
                      filterSnowice = FALSE, filterWater = FALSE, filterAerosol_climatology = FALSE,
-                     filterAerosol_low = FALSE, filterAerosol_moderate = FALSE, filterAerosol_high = FALSE){
+                     filterAerosol_low = FALSE, filterAerosol_moderate = FALSE, filterAerosol_high = FALSE, verbose = TRUE){
 
   rasterlist <- list.files(input_filepath, full.names = TRUE)
 
@@ -96,7 +97,8 @@ auto_mask <- function(input_filepath, output_filepath,
     r <- r[[1:(terra::nlyr(r)-1)]]
     e <- paste0(output_filepath, "/MASKED_", basename(rasterpath))
     terra::writeRaster(r, e)
-    print(paste0(e, " was filtered and saved."))
+    if (verbose == TRUE){
+      print(paste0(e, " was filtered and saved."))}
   }
   print("MASKING FINISHED.")
 }
