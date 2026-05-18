@@ -27,7 +27,7 @@ This package offers:
 4.  Reduce data to temporal means/median/sd.
 
 The data can be downloaded from:
-<https://appeears.earthdatacloud.nasa.gov/?_ga=2.43130661.1417310973.1723470150-437277444.1719598629>
+<https://appeears.earthdatacloud.nasa.gov>
 All the steps are consecutive and can be considered the first part of
 your analysis workflow. The package is based on the naming convention of
 NASAAppears, its crucial to not rename the files. In case of unexpected
