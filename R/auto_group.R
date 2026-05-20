@@ -15,8 +15,8 @@
 
 auto_group <- function(input_filepath, output_filepath, give_df_info = FALSE, verbose = TRUE){
 
-  my_df <- auto_df(input_filepath) #andere funktion benutzen
-  dates <- unique(my_df[c("doy", "year")]) # hier erstmal alle tage raussuchen
+  my_df <- auto_df(input_filepath) # reusing autodf
+  dates <- unique(my_df[c("doy", "year")]) #  picking out all the days
   df_info <- data.frame(year = integer(nrow(dates)),
                         doy = integer(nrow(dates)),
                         number_of_bands = integer(nrow(dates)),
@@ -30,10 +30,10 @@ auto_group <- function(input_filepath, output_filepath, give_df_info = FALSE, ve
     doy_now <- dates[d,1]
     year_now <- dates[d,2]
 
-    path <- my_df$filepath[my_df$doy == doy_now & my_df$year == year_now] |> sort() # alle pfade für den Tag schnabulieren
-    bandtest <- my_df$band[my_df$doy == doy_now & my_df$year == year_now] |> length() #für die anzahl der bänder im df und um später zu checken ob alle gleich viele bänder haben
+    path <- my_df$filepath[my_df$doy == doy_now & my_df$year == year_now] |> sort() # all paths for scenes of one specific day
+    bandtest <- my_df$band[my_df$doy == doy_now & my_df$year == year_now] |> length() # to later check if all scenes have the same number of bands
     bands <-  my_df$band[my_df$doy == doy_now & my_df$year == year_now] |> sort() |> paste(collapse ="-")
-    df_info$number_of_bands[d] <- bandtest #das ist zu checken ob immer gleich viele bänder
+    df_info$number_of_bands[d] <- bandtest
     df_info$year[d] <- year_now
     df_info$doy[d] <- doy_now
 
@@ -43,7 +43,7 @@ auto_group <- function(input_filepath, output_filepath, give_df_info = FALSE, ve
     if (verbose == TRUE){
       print(paste0(year_now, "_", doy_now, "-stack was saved."))}
 
-    #wenn der nutzer den info df analog zu nasatodf gewünscht hat, wird er hier jetzt erstellt!
+    #if the user wants a df
     if(give_df_info == TRUE){
 
       df_info$bands[d] <- bands
@@ -56,7 +56,7 @@ auto_group <- function(input_filepath, output_filepath, give_df_info = FALSE, ve
       df_info <- df_info[ ,-c(4,5,6,7)]
 
     }
-    # an sich wäre man hier schon fertig, ich will aber auch noch checken ob jedes tiff die gleiche zahl an bändern hat
+    # check if all the scenes have the same number of bands
   }
   if (length(unique(df_info$number_of_bands)) ==1){print("All rasterstacks seems to have the same amount of bands. The data should be complete.")
   }else{print("Not all the rasterstacks have the same amount of bands. Here you can see the statistics of the rasterstacks and the number of bands. The Fmask is counted as a band as well. You can still use the data, its just not complete.")
