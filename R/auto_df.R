@@ -41,12 +41,12 @@ auto_df <- function(folder_filepath, calculate_non_na_pixels = FALSE){
 
   # 5. now we want to find out the satellite typ as well
   for(x in seq_along(df$filename)){
-    kürzel <- stringr::str_extract(df$filename[x], "HLSS|HLSL")
-    if(kürzel == "HLSS"){df$satellite_typ[x] <- "sentinel"
-    }else if(kürzel == "HLSL"){df$satellite_typ[x] <- "landsat"
+    kuerzel <- stringr::str_extract(df$filename[x], "HLSS|HLSL")
+    if(kuerzel == "HLSS"){df$satellite_typ[x] <- "sentinel"
+    }else if(kuerzel == "HLSL"){df$satellite_typ[x] <- "landsat"
     }else{print("Some of the filenames do not contain HLSS or HLSL. Check if the filenames are correct!")}
   }
-  rm(kürzel)
+  rm(kuerzel)
 
   # 6. now we want to export the band
   df$band <- stringr::str_extract(df$filename, "(?<=_)[A-Za-z0-9]+(?=_)")
