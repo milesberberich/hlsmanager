@@ -79,7 +79,7 @@ reducer <- function(start_doy, end_doy, intervall, reducer_mode = "mean", input_
       terra::writeRaster(result, paste0(output_filepath, "/", reducer_mode, "_", j, "_",start, "-",end, ".tif" ))
       print(paste("Raster from", start, "to", end, "was calculated."))
     }
-    cat(paste("THE YEAR", j, "IS FINISHED.\n\n"))
+    cat(paste("THE YEAR", j, "IS FINISHED."))
   }
-  print("FUNCTION ENDED SUCCESFULLY.\n\n")
+  print("FUNCTION ENDED SUCCESFULLY.")
 }
